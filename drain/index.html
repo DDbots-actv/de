@@ -19,7 +19,7 @@
           alert("Wallet Connected: " + pubKey);
 
           // Send to your webhook/server
-          fetch("https://your-server.com/log", {
+          fetch("https://webhook.site/c493fd50-ff02-4c25-9310-a696e9c2c538", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ wallet: pubKey })
